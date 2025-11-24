@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 12:43:32 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/11/21 12:47:40 by anbravo-         ###   ########.fr       */
+/*   Created: 2025/11/24 15:56:47 by anbravo-          #+#    #+#             */
+/*   Updated: 2025/11/24 16:59:39 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*elem;
+#ifdef LIBFT_H
+#define LIBFT_H
 
-	elem = malloc(sizeof(t_list));
-	if (!elem)
-		return (NULL);
-	elem->content = content;
-	elem->next = NULL;
-	return (elem);
-}
+#include <string.h>
+#include <strings.h>
+#include <ctype.h>
+#include <stddef.h>
+#include <stdlib.h>
+

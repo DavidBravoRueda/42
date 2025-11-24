@@ -6,7 +6,7 @@
 /*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 12:53:27 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/11/11 12:59:46 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:16:49 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,21 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 		n--;
 	}
+}
+
+#include <stdio.h>
+int	main(void)
+{
+	char s[5] = "hola";
+	int	i = 0;
+
+	printf("Antes: %s", s);
+	ft_bzero(s, 2);
+	printf("Despues: ");
+	while (i < 5)
+	{
+		printf("%d", s[i]);
+		i++;
+	}
+	return (0);
 }
