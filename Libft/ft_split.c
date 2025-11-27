@@ -6,7 +6,7 @@
 /*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:55:19 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/11/18 17:06:20 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:23:30 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,19 @@ char	**ft_split(char const *s, char c)
 	res[words] = 0;
 	write_split(res, s, c);
 	return (res);
+}
+
+#include <stdio.h>
+
+int	main(void)
+{
+	char **r = ft_split("Hola,como,estas", ',');
+	int i = 0;
+
+	while (r[i])
+	{
+		printf("%s", r[i]);
+		i++;
+	}
+	return (0);
 }

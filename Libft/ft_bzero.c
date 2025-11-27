@@ -6,9 +6,11 @@
 /*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 12:53:27 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/11/24 16:16:49 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:52:24 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -23,7 +25,7 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 int	main(void)
 {
 	char s[5] = "hola";
@@ -38,4 +40,4 @@ int	main(void)
 		i++;
 	}
 	return (0);
-}
+}*/

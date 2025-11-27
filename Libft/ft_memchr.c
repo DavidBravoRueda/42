@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mencmp.c                                        :+:      :+:    :+:   */
+/*   ft_menchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 11:57:23 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/11/12 12:03:38 by anbravo-         ###   ########.fr       */
+/*   Created: 2025/11/12 11:17:22 by anbravo-          #+#    #+#             */
+/*   Updated: 2025/11/12 11:29:36 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_mencmp(const void *s1, const void *s2, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	char	*str1;
-	char	*str2;
+	char	*a;
 	size_t	i;
 
-	str1 = (unsigned char)*s1;
-	str2 = (unsigned char)*s2;
+	a = (const unsigned char *)s;
 	i = 0;
 	while (i < n)
 	{
-		if ((unsigned char)str1[i] != (unsigned char)str2[i])
-			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+		if (a[i] == (unsigned char)c)
+			return ((void *)(p + i));
+		i++;
 	}
-	return (0);
+	return (NULL);
 }
