@@ -3,40 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 12:03:17 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/11/24 16:19:24 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:08:52 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
-	int	i;
-	int	sing;
-	int	num;
+	int			i;
+	int			sign;
+	long long	result;
 
 	i = 0;
-	sing = 1;
-	num = 0;
-	while ((str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
-	{
+	sign = 1;
+	result = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	}
-	while (str[i] == '+' || str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			sing = sing * (-1);
+			sign = -1;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		num = (num * 10) + (str[i] - '0');
+		result = (result * 10) + (str[i] - '0');
+		if (sign == 1 && result > 2147483647)
+			return (2147483647);
+		if (sign == -1 && result > 2147483648L)
+			return (-2147483648);
 		i++;
 	}
-	return (num * sing);
+	return ((int)(result * sign));
 }
 
 /*#include <stdio.h>
@@ -45,4 +47,4 @@ int	main(void)
 	char	str[] = " --+++-3547abcv67";
 
 	printf("%d", ft_atoi(str));
-}*/	
+}*/

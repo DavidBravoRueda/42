@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 12:20:39 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/11/12 12:29:57 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:11:03 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *tittle, size_t len)
 {

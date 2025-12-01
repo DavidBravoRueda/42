@@ -3,29 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 17:30:18 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/11/12 11:10:59 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:11:06 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 char	*ft_strrchr(const char *s, int c)
 {
-	char	*res;
-	char	cc;
-	int		i;
+	unsigned int	i;
+	const char		*res;
+	char			cc;
 
-	cc = (char)c;
-	res = NULL;
+	cc = (char) c;
+	res = (void *) 0;
 	i = 0;
 	while (s[i])
 	{
 		if (s[i] == cc)
-			res = (char *)&s[i];
+			res = (char *) &s[i];
 		i++;
 	}
-	if (s[i] == c)
-		res = (char *)&s[i];
-	return (res);
+	if (s[i] == cc)
+		res = (char *) &s[i];
+	return ((char *)res);
 }
+
+/*#include <stdio.h>
+int	main(void)
+{
+	const char	*str = "hello, world!";
+	char	c = 'o';
+	char	*result;
+
+	result = ft_strrchr(str, c);
+	if (result)
+	{
+		printf("%s", c, result)
+	}
+	else
+	{
+		printf(c);
+	}
+	return (0);
+}*/
