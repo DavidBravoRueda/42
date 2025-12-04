@@ -6,7 +6,7 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:23:33 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/12/04 17:23:44 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:04:52 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	ft_puthex_count(unsigned long num)
 
 int	ft_putpointer(va_list ap)
 {
-	unsigned long ptr;
-	int count;
+	unsigned long	ptr;
+	int				count;
 
 	ptr = (unsigned long)va_arg(ap, void *);
 	count = ft_putstr_count("0x");

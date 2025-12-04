@@ -6,9 +6,11 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:14:05 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/12/04 17:23:53 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:36:37 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int	ft_percent(void)
 {

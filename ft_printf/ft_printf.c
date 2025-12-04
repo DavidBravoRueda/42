@@ -6,7 +6,7 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:13:49 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/12/04 17:23:52 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:12:34 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	put_converter(char c, va_list ap)
 
 int	ft_printf(const char *str, ...)
 {
-	va_list ap;
-	int i;
-	int count;
+	va_list	ap;
+	int		i;
+	int		count;
 
 	i = 0;
 	count = 0;

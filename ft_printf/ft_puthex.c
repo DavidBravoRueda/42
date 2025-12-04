@@ -6,7 +6,7 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:35:36 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/12/04 17:23:52 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:01:32 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_puthex_count(unsigned int num, char *hex_chars)
 
 int	ft_puthex(va_list ap, int uppercase)
 {
-	char *hex_chars;
+	char	*hex_chars;
 
 	if (uppercase)
 		hex_chars = "0123456789ABCDEF";

@@ -6,12 +6,14 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:17:09 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/12/04 17:23:51 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:07:54 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_putchar(va_list ap)
 {
-	char c = va_arg(ap, int);
+	char	c;
+
+	c = va_arg(ap, int);
 	return (ft_putchar_count(c));
 }
