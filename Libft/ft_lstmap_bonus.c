@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 12:20:39 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/12/03 10:49:34 by anbravo-         ###   ########.fr       */
+/*   Created: 2025/12/02 17:55:00 by anbravo-          #+#    #+#             */
+/*   Updated: 2025/12/03 12:42:12 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *tittle, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t	i;
-	size_t	j;
+	t_list	*new_list;
+	t_list	*new_obj;
+	void	*new_content;
 
-	i = 0;
-	j = 0;
-	if (tittle[0] == 0)
-		return ((char *)big);
-	while (big[i] && i < len)
+	if (!lst || !f || !del)
+		return (NULL);
+	new_list = NULL;
+	while (lst)
 	{
-		while (big[i + j] == tittle[j] && big[i + j] && i + j < len)
+		new_content = f(lst->content);
+		new_obj = ft_lstnew(new_content);
+		if (!new_obj)
 		{
-			j++;
-			if (tittle[j] == 0)
-				return ((char *)big + i);
+			del(new_content);
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
-		i++;
-		j = 0;
+		ft_lstadd_back(&new_list, new_obj);
+		lst = lst->next;
 	}
-	return (0);
+	return (new_list);
 }
