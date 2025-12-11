@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 int	ft_punbr_unsigned(unsigned int n)
 {
 	int	count;

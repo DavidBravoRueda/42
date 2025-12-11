@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_punbr(int n)
+#include "ft_printf.h"
+
+static int	ft_putnbr(int n)
 {
 	int		count;
 	long	num;
@@ -30,5 +32,5 @@ int	ft_punbr(int n)
 
 int	ft_putint(va_list ap)
 {
-	return (ft_punbr(va_arg(ap, int)));
+	return (ft_putnbr(va_arg(ap, int)));
 }

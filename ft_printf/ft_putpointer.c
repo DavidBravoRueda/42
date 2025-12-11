@@ -6,11 +6,13 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:23:33 by anbravo-          #+#    #+#             */
-/*   Updated: 2025/12/04 18:04:52 by anbravo-         ###   ########.fr       */
+/*   Updated: 2025/12/11 17:38:20 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_puthex_count(unsigned long num)
+#include "ft_printf.h"
+
+static int	ft_puthex_count(unsigned long num)
 {
 	int		count;
 	char	*hex_chars;
@@ -29,8 +31,8 @@ int	ft_putpointer(va_list ap)
 	int				count;
 
 	ptr = (unsigned long)va_arg(ap, void *);
-	count = ft_putstr_count("0x");
 	if (ptr == 0)
-		return (count + ft_puthex_count('0'));
+		return (ft_putstr_count("(nil)"));
+	count = ft_putstr_count("0x");
 	return (count + ft_puthex_count(ptr));
 }
