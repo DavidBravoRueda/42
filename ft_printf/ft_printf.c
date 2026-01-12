@@ -77,16 +77,3 @@ int	ft_printf(const char *str, ...)
 	va_end(ap);
 	return (count);
 }
-
-/*int	main(void)
-{
-	ft_printf("prueba simple\n");
-	ft_printf("%%\n");
-	ft_printf("%c\n", 'A');
-	ft_printf("%s\n", "hola3356");
-	ft_printf("%p\n", &main);
-	ft_printf("%d\n", 42);
-	ft_printf("%u\n", 4294967295);
-	ft_printf("%x\n", 255);
-	ft_printf("%X\n", 255);
-}*/
