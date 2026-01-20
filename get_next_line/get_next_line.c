@@ -12,64 +12,104 @@
 
 #include "get_next_line.h"
 
-static char	*ft_extract_line_remaider(char *line_buffer)
+static char	*ft_extract_line(char *storage)
 {
-    char	*rem;
-    size_t	i;
+	size_t	i;
 
-    i = 0;
-    while (line_buffer[i] && line_buffer[i] != '\n')
-        i++;
-    if (!line_buffer[i] || (line_buffer[i + 1])
-        return(NULL);
-    rem = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i);
-    line_buffer[i + 1] = '\0';
-    return (rem);
+	if (!storage || !storage[0])
+		return (NULL);
+	i = 0;
+	while (storage[i] && storage[i] != '\n')
+		i++;
+	return (ft_substr(storage, 0, i + (storage[i] == '\n')));
 }
 
-static char *ft_read_to_buffer(int fd, char *left_c)
+static char	*ft_clean_storage(char *storage)
 {
-    char    *buff;
-    char    *temp;
-    ssize_t bytes_read;
+	char	*new_storage;
+	size_t	i;
 
-    buff = malloc(BUFFER_SIZE + 1);
-    if (!buff)
-        return (NULL);
-    bytes_read = 1;
-    while (bytes_read > 0 && !ft_strchr(left_c, '\n'))
-    {
-        bytes_read = read(fd, buff, BUFFER_SIZE);
-        if (bytes_read == -1)
-        {
-            free(buff);
-            free(left_c);
-            return (NULL);
-        }
-        buff[bytes_read] = '\0';
-        temp = left_c;
-        left_c = ft_strjoin(temp, buff);
-        free(temp);
-    }
-    free(buff);
-    return (left_c);
+	i = 0;
+	while (storage[i] && storage[i] != '\n')
+		i++;
+	if (!storage[i])
+	{
+		free(storage);
+		return (NULL);
+	}
+	new_storage = ft_substr(storage, i + 1, ft_strlen(storage) - i);
+	free(storage);
+	return (new_storage);
 }
 
-char    *get_next_line(int fd)
+static char	*ft_read_to_buffer(int fd, char *storage)
 {
-    static char	*leftover;
-    char		*line;
+	char	*buffer;
+	ssize_t	b_read;
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
-        return (NULL);
-    leftover = ft_read_to_buffer(fd, leftover);
-    if (!leftover || *leftover == '\0')
-    {
-        free(leftover);
-        leftover = NULL;
-        return (NULL);
-    }
-    line = leftover;
-    leftover = ft_extract_line_remaider(line);
-    return (line);
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	b_read = 1;
+	while (b_read > 0 && !ft_strchr(storage, '\n'))
+	{
+		b_read = read(fd, buffer, BUFFER_SIZE);
+		if (b_read == -1)
+		{
+			free(buffer);
+			free(storage);
+			return (NULL);
+		}
+		buffer[b_read] = '\0';
+		storage = ft_strjoin(storage, buffer);
+	}
+	free(buffer);
+	return (storage);
 }
+
+char	*get_next_line(int fd)
+{
+	static char	*storage;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	storage = ft_read_to_buffer(fd, storage);
+	if (!storage)
+		return (NULL);
+	line = ft_extract_line(storage);
+	storage = ft_clean_storage(storage);
+	return (line);
+}
+
+/*
+#ifdef TEST_MAIN
+# include <stdio.h>
+# include <fcntl.h>
+
+int	main(void)
+{
+	int		fd;
+	char	*line;
+	int		line_count;
+
+	line_count = 1;
+	// Creamos/Abrimos un archivo de prueba
+	fd = open("test.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error: No se pudo abrir test.txt. Crea el archivo primero.\n");
+		return (1);
+	}
+	printf("--- INICIO DEL TEST ---\n");
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("Línea [%d]: %s", line_count++, line);
+		free(line); // ¡Vital para evitar leaks!
+	}
+	printf("\n--- FIN DEL TEST ---\n");
+	close(fd);
+	return (0);
+}
+#endif
+*/
