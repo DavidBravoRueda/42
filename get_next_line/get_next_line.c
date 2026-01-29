@@ -15,13 +15,17 @@
 static char	*ft_extract_line(char *storage)
 {
 	size_t	i;
+	char	*line;
 
 	if (!storage || !storage[0])
 		return (NULL);
 	i = 0;
 	while (storage[i] && storage[i] != '\n')
 		i++;
-	return (ft_substr(storage, 0, i + (storage[i] == '\n')));
+	if (storage[i] == '\n')
+		i++;
+	line = ft_substr(storage, 0, i);
+	return (line);
 }
 
 static char	*ft_clean_storage(char *storage)
@@ -49,7 +53,7 @@ static char	*ft_read_to_buffer(int fd, char *storage)
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
+		return (free(storage), NULL);
 	b_read = 1;
 	while (b_read > 0 && !ft_strchr(storage, '\n'))
 	{
@@ -62,6 +66,8 @@ static char	*ft_read_to_buffer(int fd, char *storage)
 		}
 		buffer[b_read] = '\0';
 		storage = ft_strjoin(storage, buffer);
+		if (!storage)
+			return (free(buffer), NULL);
 	}
 	free(buffer);
 	return (storage);
@@ -78,38 +84,12 @@ char	*get_next_line(int fd)
 	if (!storage)
 		return (NULL);
 	line = ft_extract_line(storage);
+	if (!line)
+	{
+		free(storage);
+		storage = NULL;
+		return (NULL);
+	}
 	storage = ft_clean_storage(storage);
 	return (line);
 }
-
-/*
-#ifdef TEST_MAIN
-# include <stdio.h>
-# include <fcntl.h>
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-	int		line_count;
-
-	line_count = 1;
-	// Creamos/Abrimos un archivo de prueba
-	fd = open("test.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Error: No se pudo abrir test.txt. Crea el archivo primero.\n");
-		return (1);
-	}
-	printf("--- INICIO DEL TEST ---\n");
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("Línea [%d]: %s", line_count++, line);
-		free(line); // ¡Vital para evitar leaks!
-	}
-	printf("\n--- FIN DEL TEST ---\n");
-	close(fd);
-	return (0);
-}
-#endif
-*/
