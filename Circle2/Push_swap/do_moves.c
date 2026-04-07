@@ -3,13 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   do_moves.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 17:46:47 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/03/12 18:01:41 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:44:42 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
+
+static void	rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
+{
+	while (*cost_a > 0 && *cost_b > 0)
+	{
+		(*cost_a)--;
+		(*cost_b)--;
+		do_rr(a, b);
+	}
+}
 
 static void	reverse_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
 {
@@ -21,47 +32,37 @@ static void	reverse_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
 	}
 }
 
-static void	rotate_a(t_stack **a, int *cost)
-{
-	while (*cost)
-	{
-		if (*cost > 0)
-		{
-			do_ra(a);
-			(*cost)--;
-		}
-		else if (*cost < 0)
-		{
-			do_rra(a);
-			(*cost)++;
-		}
-	}
-}
-
-static void	rotate_b(t_stack **b, int *cost)
-{
-	while (*cost)
-	{
-		if (*cost > 0)
-		{
-			do_rb(b);
-			(*cost)--;
-		}
-		else if (*cost < 0)
-		{
-			do_rrb(b);
-			(*cost)++;
-		}
-	}
-}
-
 void	do_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
 {
 	if (cost_a < 0 && cost_b < 0)
 		reverse_both(a, b, &cost_a, &cost_b);
-	else if (cost_a > 0 && cost_b >0)
+	else if (cost_a > 0 && cost_b > 0)
 		rotate_both(a, b, &cost_a, &cost_b);
-	rotate_a(a, &cost_a);
-	rotate_b(b, &cost_a);
+	while (cost_a)
+	{
+		if (cost_a > 0)
+		{
+			do_ra(a);
+			cost_a--;
+		}
+		else
+		{
+			do_rra(a);
+			cost_a++;
+		}
+	}
+	while (cost_b)
+	{
+		if (cost_b > 0)
+		{
+			do_rb(b);
+			cost_b--;
+		}
+		else
+		{
+			do_rrb(b);
+			cost_b++;
+		}
+	}
 	do_pa(a, b);
 }

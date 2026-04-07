@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 18:51:18 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/03/17 19:02:01 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:45:13 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_stack **src, t_stack **dst)
+static void	push(t_stack **src, t_stack **dest)
 {
 	t_stack	*tmp;
 
 	if (*src == NULL)
 		return ;
 	tmp = (*src)->next;
-	(*src)->next = *dst;
-	*dst = *src;
+	(*src)->next = *dest;
+	*dest = *src;
 	*src = tmp;
 }
 

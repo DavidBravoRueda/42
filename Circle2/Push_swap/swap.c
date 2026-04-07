@@ -1,46 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 19:01:03 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/04/07 12:45:24 by anbravo-         ###   ########.fr       */
+/*   Created: 2026/03/20 14:09:26 by anbravo-          #+#    #+#             */
+/*   Updated: 2026/04/07 12:45:50 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotate(t_stack **stack)
+static void	swap(t_stack **stack)
 {
 	t_stack	*tmp;
-	t_stack	*tail;
 
-	if (!*stack || !(*stack)->next)
+	if (!*stack || (*stack)->next == NULL)
 		return ;
 	tmp = *stack;
 	*stack = (*stack)->next;
-	tail = get_bottom(*stack);
-	tmp->next = NULL;
-	tail->next = tmp;
+	tmp->next = (*stack)->next;
+	(*stack)->next = tmp;
 }
 
-void	do_ra(t_stack **stack_a)
+void	do_sa(t_stack **stack_a)
 {
-	rotate(stack_a);
-	ft_putstr("ra\n");
+	swap(stack_a);
+	ft_putstr("sa\n");
 }
 
-void	do_rb(t_stack **stack_b)
+void	do_sb(t_stack **stack_b)
 {
-	rotate(stack_b);
-	ft_putstr("rb\n");
+	swap(stack_b);
+	ft_putstr("sb\n");
 }
 
-void	do_rr(t_stack **stack_a, t_stack **stack_b)
+void	do_ss(t_stack **stack_a, t_stack **stack_b)
 {
-	rotate(stack_a);
-	rotate(stack_b);
-	ft_putstr("rr\n");
+	swap(stack_a);
+	swap(stack_b);
+	ft_putstr("ss\n");
 }

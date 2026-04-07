@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:11:43 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/03/19 19:23:18 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:45:33 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,17 @@ static void	push_init(t_stack **stack_a, t_stack **stack_b)
 	i = 0;
 	while (stack_size > 6 && i < stack_size && pushes < stack_size / 2)
 	{
-		if((*stack_a)->index <= stack_size /2)
+		if ((*stack_a)->index <= stack_size / 2)
 		{
 			do_pb(stack_a, stack_b);
 			pushes++;
 		}
 		else
 			do_ra(stack_a);
-		i++
+		i++;
 	}
-	while (stack_size - pushes > 3)
-	{
+	while (get_stack_size(*stack_a) > 3)
 		do_pb(stack_a, stack_b);
-		pushes++;
-	}
 }
 
 static void	sort_stack(t_stack **stack_a)
@@ -56,7 +53,7 @@ static void	sort_stack(t_stack **stack_a)
 	}
 	else
 	{
-		while (lowest_p > 0);
+		while (lowest_p > 0)
 		{
 			do_ra(stack_a);
 			lowest_p--;

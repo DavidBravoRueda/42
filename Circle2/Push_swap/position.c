@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   position.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 18:20:01 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/03/17 18:48:46 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:45:01 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	get_position(t_stack **stack)
 {
 	t_stack	*tmp;
-	int	i;
+	int		i;
 
 	tmp = *stack;
 	i = 0;
@@ -30,6 +30,7 @@ static void	get_position(t_stack **stack)
 static int	get_target(t_stack **stack_a, int index_b, int target_i, int target)
 {
 	t_stack	*tmp;
+
 	tmp = *stack_a;
 	while (tmp)
 	{
@@ -41,7 +42,7 @@ static int	get_target(t_stack **stack_a, int index_b, int target_i, int target)
 		tmp = tmp->next;
 	}
 	if (target_i != INT_MAX)
-		return  (target);
+		return (target);
 	tmp = *stack_a;
 	while (tmp)
 	{
@@ -55,11 +56,11 @@ static int	get_target(t_stack **stack_a, int index_b, int target_i, int target)
 	return (target);
 }
 
-int position_lowes_index(t_stack **stack)
+int	position_lowest_index(t_stack **stack)
 {
 	t_stack	*tmp;
-	int	lowest_i;
-	int	lowest_p;
+	int		lowest_i;
+	int		lowest_p;
 
 	tmp = *stack;
 	lowest_i = INT_MAX;
@@ -67,7 +68,7 @@ int position_lowes_index(t_stack **stack)
 	lowest_p = tmp->pos;
 	while (tmp)
 	{
-		if (tmp->index < lowes_i)
+		if (tmp->index < lowest_i)
 		{
 			lowest_i = tmp->index;
 			lowest_p = tmp->pos;
@@ -80,7 +81,7 @@ int position_lowes_index(t_stack **stack)
 void	get_target_position(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tmp;
-	int	target;
+	int		target;
 
 	tmp = *stack_b;
 	get_position(stack_a);

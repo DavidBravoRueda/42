@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cost.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:36:46 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/03/12 17:45:10 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:44:29 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void cost(t_stack **stack_a, t_stack **stack_b)
+#include "push_swap.h"
+
+void	cost(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *tmp_a;
-	t_stack *tmb_b;
-	int	size_a;
-	int	size_b;
+	t_stack	*tmp_a;
+	t_stack	*tmp_b;
+	int		size_a;
+	int		size_b;
 
 	tmp_a = *stack_a;
 	tmp_b = *stack_b;
@@ -24,27 +26,27 @@ void cost(t_stack **stack_a, t_stack **stack_b)
 	while (tmp_b)
 	{
 		tmp_b->cost_b = tmp_b->pos;
-		if (tmp_b->pos > size_b /2)
+		if (tmp_b->pos > size_b / 2)
 			tmp_b->cost_b = (size_b - tmp_b->pos) * -1;
-		tmb_b->cost_a = tmp_b->target;
+		tmp_b->cost_a = tmp_b->target;
 		if (tmp_b->target > size_a / 2)
 			tmp_b->cost_a = (size_a - tmp_b->target) * -1;
 		tmp_b = tmp_b->next;
 	}
 }
 
-void cheapest_move(t_stack **stack_a, t_stack **stack_b)
+void	cheapest_move(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tmp;
-	int	cheapest;
-	int	cost_a;
-	int	cost_b;
+	int		cheapest;
+	int		cost_a;
+	int		cost_b;
 
 	tmp = *stack_b;
 	cheapest = INT_MAX;
 	while (tmp)
 	{
-		if (abs(tmp->cost_a) + abs(tmp-> cost_b) < cheapest)
+		if (abs(tmp->cost_a) + abs(tmp->cost_b) < cheapest)
 		{
 			cheapest = abs(tmp->cost_a) + abs(tmp->cost_b);
 			cost_a = tmp->cost_a;

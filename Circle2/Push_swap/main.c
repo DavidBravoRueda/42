@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbravo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 18:38:54 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/03/12 19:00:50 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:44:50 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_sorted(t_stack *stack)
 {
+	if (!stack)
+		return (1);
 	while (stack->next != NULL)
 	{
 		if (stack->value > stack->next->value)
@@ -25,7 +27,7 @@ int	is_sorted(t_stack *stack)
 
 static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
 {
-	if(stack_size == 2 && !is_sorted(*stack_a))
+	if (stack_size == 2 && !is_sorted(*stack_a))
 		do_sa(stack_a);
 	else if (stack_size == 3)
 		sort_three(stack_a);
@@ -35,23 +37,25 @@ static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
 
 void	get_numbers(char *av, t_stack **stack_a)
 {
-	char	**param;
+	char		**param;
 	long int	n;
-	int	i;
+	int			i;
 
 	param = ft_split(av, ' ');
+	if (!param)
+		return ;
 	i = 0;
-	while (param[i] != '\0')
+	while (param[i] != NULL)
 	{
 		if (input_is_correct(param[i]))
 		{
 			n = ft_atoi(param[i]);
 			if (n > INT_MAX || n < INT_MIN)
 				error_exit(stack_a, NULL);
-			stack_add(stack_a, stack_new(n));
+			stack_add(stack_a, stack_new((int)n));
 		}
 		else
-			error_exit(NULL, NULL);
+			error_exit(stack_a, NULL);
 		free(param[i]);
 		i++;
 	}
@@ -62,12 +66,14 @@ int	main(int ac, char **av)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int	stack_size;
-	int	i;
+	int		stack_size;
+	int		i;
 
-	i = 1;
-	stack_b = NULL;
+	if (ac < 2)
+		return (0);
 	stack_a = NULL;
+	stack_b = NULL;
+	i = 1;
 	while (i < ac)
 	{
 		get_numbers(av[i], &stack_a);
