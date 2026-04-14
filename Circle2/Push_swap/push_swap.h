@@ -6,7 +6,7 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 19:06:14 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/04/14 17:36:58 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/14 18:51:51 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 
 # include <stddef.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
@@ -34,6 +33,10 @@ long		input_is_correct(char *str);
 int			is_duplicate(t_stack *column);
 void		error_exit(t_stack **stack_a, t_stack **stack_b);
 void		free_stack(t_stack **stack);
+long int	ft_atoi(const char *str);
+void		ft_putstr(char *str);
+size_t		ft_strlen(const char *s);
+int			abs(int nb);
 
 t_stack		*stack_new(int value);
 void		stack_add(t_stack **stack, t_stack *new);
@@ -42,7 +45,7 @@ t_stack		*before_bottom(t_stack *stack);
 int			get_stack_size(t_stack *stack);
 int			is_sorted(t_stack *stack);
 
-void		get_index(t_stack *stack_a, int stack_size);
+void		get_index(t_stack *stack_a);
 void		get_target_position(t_stack **stack_a, t_stack **stack_b);
 void		cost(t_stack **stack_a, t_stack **stack_b);
 void		cheapest_move(t_stack **stack_a, t_stack **stack_b);
@@ -64,9 +67,5 @@ void		do_rrb(t_stack **stack_b);
 void		do_rrr(t_stack **stack_a, t_stack **stack_b);
 
 char		**ft_split(char const *s, char c);
-long int	ft_atoi(const char *str);
-void		ft_putstr(char *str);
-size_t		ft_strlen(const char *s);
-int			abs(int nb);
 
 #endif

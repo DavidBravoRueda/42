@@ -6,13 +6,13 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 13:33:31 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/04/14 17:50:07 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/14 18:49:57 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_index(t_stack *stack_a, int stack_size)
+void	get_index(t_stack *stack_a)
 {
 	t_stack	*ptr;
 	t_stack	*compare;

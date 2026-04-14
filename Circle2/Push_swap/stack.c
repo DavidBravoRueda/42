@@ -6,11 +6,33 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 13:17:39 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/04/07 12:45:42 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/14 18:52:59 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_stack	*before_bottom(t_stack *stack)
+{
+	if (!stack || !stack->next)
+		return (stack);
+	while (stack->next->next != NULL)
+		stack = stack->next;
+	return (stack);
+}
+
+int	is_sorted(t_stack *stack)
+{
+	if (!stack)
+		return (1);
+	while (stack->next)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
 
 t_stack	*stack_new(int value)
 {
@@ -51,26 +73,4 @@ t_stack	*get_bottom(t_stack *stack)
 	while (stack->next)
 		stack = stack->next;
 	return (stack);
-}
-
-t_stack	*before_bottom(t_stack *stack)
-{
-	if (!stack || !stack->next)
-		return (stack);
-	while (stack->next->next != NULL)
-		stack = stack->next;
-	return (stack);
-}
-
-int	get_stack_size(t_stack *stack)
-{
-	int	size;
-
-	size = 0;
-	while (stack)
-	{
-		stack = stack->next;
-		size++;
-	}
-	return (size);
 }
