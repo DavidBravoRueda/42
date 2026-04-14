@@ -6,84 +6,88 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 18:38:54 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/04/07 12:44:50 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:55:43 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *stack)
+static void	free_param(char **param)
 {
-	if (!stack)
-		return (1);
-	while (stack->next != NULL)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
+	int	i;
 
-static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
-{
-	if (stack_size == 2 && !is_sorted(*stack_a))
-		do_sa(stack_a);
-	else if (stack_size == 3)
-		sort_three(stack_a);
-	else if (stack_size > 3 && !is_sorted(*stack_a))
-		sort(stack_a, stack_b);
-}
-
-void	get_numbers(char *av, t_stack **stack_a)
-{
-	char		**param;
-	long int	n;
-	int			i;
-
-	param = ft_split(av, ' ');
+	i = 0;
 	if (!param)
 		return ;
-	i = 0;
-	while (param[i] != NULL)
+	while (param[i])
 	{
-		if (input_is_correct(param[i]))
-		{
-			n = ft_atoi(param[i]);
-			if (n > INT_MAX || n < INT_MIN)
-				error_exit(stack_a, NULL);
-			stack_add(stack_a, stack_new((int)n));
-		}
-		else
-			error_exit(stack_a, NULL);
 		free(param[i]);
 		i++;
 	}
 	free(param);
 }
 
+static void	process_input(char *av, t_stack **stack_a)
+{
+	char		**p;
+	long int	n;
+	int			i;
+
+	p = ft_split(av, ' ');
+	if (!p)
+		return ;
+	i = 0;
+	while (p[i] != NULL)
+	{
+		n = ft_atoi(p[i]);
+		if (input_is_correct(p[i]) && (n <= INT_MAX && n >= INT_MIN))
+			stack_add(stack_a, stack_new((int)n));
+		else
+		{
+			free_param(p);
+			error_exit(stack_a, NULL);
+		}
+		free(p[i]);
+		i++;
+	}
+	free(p);
+}
+
+static void	execute_sort(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size;
+
+	size = get_stack_size(*stack_a);
+	if (is_sorted(*stack_a))
+		return ;
+	if (size == 2)
+		do_sa(stack_a);
+	else if (size == 3)
+		sort_three(stack_a);
+	else
+		sort(stack_a, stack_b);
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		stack_size;
 	int		i;
 
-	if (ac < 2)
+	if (ac < 2 || (ac == 2 && !av[1][0]))
 		return (0);
 	stack_a = NULL;
 	stack_b = NULL;
 	i = 1;
 	while (i < ac)
 	{
-		get_numbers(av[i], &stack_a);
+		process_input(av[i], &stack_a);
 		i++;
 	}
 	if (is_duplicate(stack_a))
 		error_exit(&stack_a, NULL);
-	stack_size = get_stack_size(stack_a);
-	get_index(stack_a, stack_size + 1);
-	push_swap(&stack_a, &stack_b, stack_size);
+	get_index(stack_a, get_stack_size(stack_a));
+	execute_sort(&stack_a, &stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: anbravo- <anbravo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 19:06:14 by anbravo-          #+#    #+#             */
-/*   Updated: 2026/04/07 12:45:07 by anbravo-         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:36:58 by anbravo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void		do_rr(t_stack **stack_a, t_stack **stack_b);
 void		do_rra(t_stack **stack_a);
 void		do_rrb(t_stack **stack_b);
 void		do_rrr(t_stack **stack_a, t_stack **stack_b);
-
 
 char		**ft_split(char const *s, char c);
 long int	ft_atoi(const char *str);
